@@ -1,40 +1,67 @@
-<script setup>
-import { ref } from 'vue'
-
-defineProps({
-  msg: String,
-})
-
-const count = ref(0)
+<script>
+import { store } from '../store.js';
+export default {
+    name : "AppHeader",
+    data() {
+        return{
+        // ACCESSO AI DATI DELLO STORAGE PRINCIPALE
+        store
+        }
+    }
+}
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
 
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
+    <header>
 
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+        <h1>BOOLFIX</h1>
+
+        <div class="search">
+            <input type="search" placeholder="Ricerca film" v-model.trim="store.searchMovie">
+            <button @click.prevent="$emit('mysearch')">INVIA</button>
+        </div>
+
+    </header>
+
 </template>
 
-<style scoped>
-.read-the-docs {
-  color: #888;
-}
+<style scoped lang="scss">
+@use '../styles/general.scss';
+@use '../styles/partials/variables.scss';
+@import '../styles/partials/variables';
+
+
+    header{
+        height: 100px;
+        background-color: $secondo;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1{
+            color: $primo;
+            font-weight: 800;
+            margin-left: 100px;
+        }
+
+        .search{
+            margin-right: 100px;
+
+            input{
+                height: 40px;
+                outline: none;
+                border: none;
+            }
+            
+            button{
+                height: 40px;
+                width: 60px;
+                background-color: red;
+                color: black;
+                font-weight: 800;
+                border: none;
+            }
+        }
+    }
 </style>
