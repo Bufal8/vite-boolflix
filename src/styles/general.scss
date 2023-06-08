@@ -1,0 +1,11 @@
+// Dichiaro l'utilizzo della variables
+@use './partials/variables' as *;
+
+// Importazione bootstrap
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+// Regole scss generali
+body{
+    background-color: $quarto;
+    color: $terzo;
+}
