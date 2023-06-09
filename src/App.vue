@@ -27,12 +27,22 @@ export default{
       // se la barra di ricerca non è vuota
       if(store.searchMovie !== ""){
         // Aggiungi all'Url il valore inserito nella barra di ricerca
-        personalURL += `${store.searchMovie}`
+        personalURL += `?api_key=${store.apiKey}&query=${store.searchMovie}`
       }
 
       axios.get(personalURL)
       .then(res => {
         store.movieList = res.data.results;
+      })
+
+      let personalURLTvShow = store.apiTvShowURL + `?api_key=${store.apiKey}&query=`;
+      if(store.searchMovie !== ""){
+        personalURLTvShow += `?api_key=${store.apiKey}&query=${store.searchMovie}`
+      }
+      axios.get(personalURLTvShow)
+      .then(res => {
+        store.tvShowList = res.data.results;
+        store.allContentList = store.movieList.concat(store.tvShowList);
       })
       .catch(err => {
         console.log(err);
@@ -48,7 +58,7 @@ export default{
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader @mysearch="getMovies"/>
   <AppMain />
 </template>
 
